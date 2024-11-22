@@ -1,0 +1,133 @@
+digraph G { subgraph get {
+rankdir=LR;
+-836524240 [label="get(String, Number): Char"];
+t5e7396151fcb33a8 [shape=plaintext, label=return];
+t3d3cc2a7f43aa3c0 [label="pop $indexp0tc52768c979bf4e2f;\npop $sp1ted16edb32497b70d;\npop $sp0t8961c3ce08462415;\npush $sp0t8961c3ce08462415;\npush $indexp0tc52768c979bf4e2f;\npop $offsetp0tac916972e9a192f4;\npop $ptrp0t3a2ee59f830e13ee;\npush $ptrp0t3a2ee59f830e13ee;\nadd $offsetp0tac916972e9a192f4;\npop $ptrp0t8c5493cb6f0ffb60;\npush $ptrp0t8c5493cb6f0ffb60;\ndef $ptr;\npop $ptr;\ndef $tempDeref;\npush $heapSize;\nsub $ptr;\ndel $ptr;\ndef $moved;\nclone $moved;\nfor {\n@heap.pop $tempDeref;\n@antiHeap.push $tempDeref;\n};\n@antiHeap.pop $tempDeref;\npush $tempDeref;\n@heap.push $tempDeref;\npush $moved;\nsub 1;\nfor {\n@antiHeap.pop $tempDeref;\n@heap.push $tempDeref;\n};\ndel $moved;\ndel $tempDeref;\nDeclared: index, s, ptr, offset, ptr\nDropped: offset, ptr, index, s, ptr" shape=box];
+-836524240 -> t3d3cc2a7f43aa3c0;
+t3d3cc2a7f43aa3c0 -> t5e7396151fcb33a8;
+}
+
+subgraph alloc {
+rankdir=LR;
+-1582624614 [label="alloc[Number](Number): Number*"];
+t785a9793db57ed9b [shape=plaintext, label=return];
+t26dec11973e84a96 [label="pop $np0tc42f5e6feeb1ef10;\npush $np0tc42f5e6feeb1ef10;\nmul 1;\npop $amountp0tf2f24d4790e60d80;\npush $heapSize;\npop $ptrp0t6a5661ec7f570b20;\npush $amountp0tf2f24d4790e60d80;\nfor {\n    @heap.push 0;\n    inc $heapSize;\n};\npush $ptrp0t6a5661ec7f570b20;\nDeclared: n, amount, ptr\nDropped: n, amount, ptr" shape=box];
+-1582624614 -> t26dec11973e84a96;
+t26dec11973e84a96 -> t785a9793db57ed9b;
+}
+
+subgraph newArray {
+rankdir=LR;
+-952566072 [label="newArray[Number](Number): Array[Number]"];
+t837b7bdcd9c349d4 [shape=plaintext, label=return];
+t4b461b1bff9a61f [label="pop $lenp0te03225bedec3860;\npush $lenp0te03225bedec3860;\n@callStack.push $lenp0te03225bedec3860;\nDeclared: len, data" shape=box];
+t75fd715f8445cf8 [label="@callStack.pop $lenp0te03225bedec3860;\npop $datap0t92cbe99d5a63df6e;\npush $datap0t92cbe99d5a63df6e;\npush $lenp0te03225bedec3860;\nDropped: len, data" shape=box];
+-952566072 -> t4b461b1bff9a61f;
+t4b461b1bff9a61f -> t75fd715f8445cf8 [label="call alloc[Number](Number): Number*"];
+t75fd715f8445cf8 -> t837b7bdcd9c349d4;
+}
+
+subgraph readInputLower {
+rankdir=LR;
+-150407516 [label="readInputLower(): String"];
+te201f17c8c1b9e31 [shape=plaintext, label=return];
+t16a4b86ebd4cfbfc [label="push 0;\nDeclared: arr" shape=box];
+t6b8c0e7ba3ece540 [label="pop $arrp1ta930a5c4663a046f;\npop $arrp0tdd763ef09223bf03;" shape=box];
+t33ef7195fbbe2ff4 [label="push 1;" shape=box];
+tf50aa8c8907fd381 [label="read $ip0tee53a777f4cb34ca;\npush $ip0tee53a777f4cb34ca;\npop $inputp0t261deac6fc332e2f;\nnot $inputp0t261deac6fc332e2f;\nDeclared: input, i\nDropped: i" shape=box];
+t97fe50cd26727694 [label="" shape=box];
+tbe0b2159adb7c017 [label="push $arrp0tdd763ef09223bf03;\npush $arrp1ta930a5c4663a046f;\nDropped: arr" shape=box];
+t280677f88e390be8 [label="push $inputp0t261deac6fc332e2f;\ngt 64;\npush $inputp0t261deac6fc332e2f;\nlt 91;\nand { nop; };" shape=box];
+t64a0b9092d944ea2 [label="push $inputp0t261deac6fc332e2f;\nadd 32;\npop $inputp0t261deac6fc332e2f;" shape=box];
+t32940e5dc59f4580 [label="@heap.push $inputp0t261deac6fc332e2f;\ninc $heapSize;\npush $arrp0tdd763ef09223bf03;\npush $arrp1ta930a5c4663a046f;\nadd 1;\npop $arrp1ta930a5c4663a046f;\npop $arrp0tdd763ef09223bf03;\nDropped: input" shape=box];
+-150407516 -> t16a4b86ebd4cfbfc;
+t16a4b86ebd4cfbfc -> t6b8c0e7ba3ece540 [label="call newArray[Number](Number): Array[Number]"];
+t6b8c0e7ba3ece540 -> t33ef7195fbbe2ff4;
+t33ef7195fbbe2ff4 -> tf50aa8c8907fd381 [label=true color=green];
+t33ef7195fbbe2ff4 -> tbe0b2159adb7c017 [label=false color=red];
+tf50aa8c8907fd381 -> t97fe50cd26727694 [label=true color=green];
+tf50aa8c8907fd381 -> t280677f88e390be8 [label=false color=red];
+t97fe50cd26727694 -> tbe0b2159adb7c017;
+tbe0b2159adb7c017 -> te201f17c8c1b9e31;
+t280677f88e390be8 -> t64a0b9092d944ea2 [label=true color=green];
+t280677f88e390be8 -> t32940e5dc59f4580 [label=false color=red];
+t64a0b9092d944ea2 -> t32940e5dc59f4580;
+t32940e5dc59f4580 -> t33ef7195fbbe2ff4;
+}
+
+subgraph indexOf {
+rankdir=LR;
+1142181717 [label="indexOf(String, Number, String): Number"];
+t9905e178138b01cc [shape=plaintext, label=return];
+tf4da43b196654182 [label="pop $otherp1t39ccf1d1ea029eea;\npop $otherp0tb54cfc6470ad693a;\npop $startp0tb9a0ad69416150c6;\npop $sp1t25e30e7cfa76e295;\npop $sp0t23140bed7b7a980;\npush $startp0tb9a0ad69416150c6;\npop $ip0ta341b2db3efe0ebb;\nDeclared: other, start, s, i" shape=box];
+tacda562561c7df35 [label="push $ip0ta341b2db3efe0ebb;\nlt $sp1t25e30e7cfa76e295;" shape=box];
+td8fa29a5bd9efdde [label="push 0;\npop $jp0t24750710b7ff8cc3;\nDeclared: j" shape=box];
+t319b10ada4420adf [label="push $jp0t24750710b7ff8cc3;\nlt $otherp1t39ccf1d1ea029eea;" shape=box];
+t29585944e1bd0dd8 [label="push $sp0t23140bed7b7a980;\npush $sp1t25e30e7cfa76e295;\npush $ip0ta341b2db3efe0ebb;\nadd $jp0t24750710b7ff8cc3;\n@callStack.push $jp0t24750710b7ff8cc3;\n@callStack.push $otherp0tb54cfc6470ad693a;\n@callStack.push $otherp1t39ccf1d1ea029eea;\n@callStack.push $startp0tb9a0ad69416150c6;\n@callStack.push $sp0t23140bed7b7a980;\n@callStack.push $sp1t25e30e7cfa76e295;\n@callStack.push $ip0ta341b2db3efe0ebb;" shape=box];
+t519f27e22ec0bdc9 [label="@callStack.pop $ip0ta341b2db3efe0ebb;\n@callStack.pop $sp1t25e30e7cfa76e295;\n@callStack.pop $sp0t23140bed7b7a980;\n@callStack.pop $startp0tb9a0ad69416150c6;\n@callStack.pop $otherp1t39ccf1d1ea029eea;\n@callStack.pop $otherp0tb54cfc6470ad693a;\n@callStack.pop $jp0t24750710b7ff8cc3;\npush $otherp0tb54cfc6470ad693a;\npush $otherp1t39ccf1d1ea029eea;\npush $jp0t24750710b7ff8cc3;\n@callStack.push $jp0t24750710b7ff8cc3;\n@callStack.push $otherp0tb54cfc6470ad693a;\n@callStack.push $otherp1t39ccf1d1ea029eea;\n@callStack.push $startp0tb9a0ad69416150c6;\n@callStack.push $sp0t23140bed7b7a980;\n@callStack.push $sp1t25e30e7cfa76e295;\n@callStack.push $ip0ta341b2db3efe0ebb;" shape=box];
+tcc7c8276f8ac7355 [label="@callStack.pop $ip0ta341b2db3efe0ebb;\n@callStack.pop $sp1t25e30e7cfa76e295;\n@callStack.pop $sp0t23140bed7b7a980;\n@callStack.pop $startp0tb9a0ad69416150c6;\n@callStack.pop $otherp1t39ccf1d1ea029eea;\n@callStack.pop $otherp0tb54cfc6470ad693a;\n@callStack.pop $jp0t24750710b7ff8cc3;\neq { nop; };\nnot { nop; };" shape=box];
+tf0b3555f7b4f4d18 [label="" shape=box];
+ta98bd7bc029c60c [label="push $jp0t24750710b7ff8cc3;\neq $otherp1t39ccf1d1ea029eea;" shape=box];
+t125f85103493d78b [label="push $ip0ta341b2db3efe0ebb;\nDropped: j, other, start, s, i" shape=box];
+t24f17b40a7890939 [label="push $ip0ta341b2db3efe0ebb;\nadd 1;\npop $ip0ta341b2db3efe0ebb;\nDropped: j" shape=box];
+t52872da63a8c0fa6 [label="push $jp0t24750710b7ff8cc3;\nadd 1;\npop $jp0t24750710b7ff8cc3;" shape=box];
+td526fe0da62897a4 [label="neg 1;\nDropped: other, start, s, i" shape=box];
+1142181717 -> tf4da43b196654182;
+tf4da43b196654182 -> tacda562561c7df35;
+tacda562561c7df35 -> td8fa29a5bd9efdde [label=true color=green];
+tacda562561c7df35 -> td526fe0da62897a4 [label=false color=red];
+td8fa29a5bd9efdde -> t319b10ada4420adf;
+t319b10ada4420adf -> t29585944e1bd0dd8 [label=true color=green];
+t319b10ada4420adf -> ta98bd7bc029c60c [label=false color=red];
+t29585944e1bd0dd8 -> t519f27e22ec0bdc9 [label="call get(String, Number): Char"];
+t519f27e22ec0bdc9 -> tcc7c8276f8ac7355 [label="call get(String, Number): Char"];
+tcc7c8276f8ac7355 -> tf0b3555f7b4f4d18 [label=true color=green];
+tcc7c8276f8ac7355 -> t52872da63a8c0fa6 [label=false color=red];
+tf0b3555f7b4f4d18 -> ta98bd7bc029c60c;
+ta98bd7bc029c60c -> t125f85103493d78b [label=true color=green];
+ta98bd7bc029c60c -> t24f17b40a7890939 [label=false color=red];
+t125f85103493d78b -> t9905e178138b01cc;
+t24f17b40a7890939 -> tacda562561c7df35;
+t52872da63a8c0fa6 -> t319b10ada4420adf;
+td526fe0da62897a4 -> t9905e178138b01cc;
+}
+
+subgraph main {
+rankdir=LR;
+1211053195 [label="main(): Unit"];
+t88377ccd2fe7003a [shape=plaintext, label=return];
+ta8af52df1ba9b3e2 [label="Declared: input" shape=box];
+t41419ad9d47b665f [label="pop $inputp1tbb9cabed7cc011b5;\npop $inputp0td3e5ac4f4598a809;\npush 0;\npop $startIndexp0t42e99e0429583dd0;\npush $inputp0td3e5ac4f4598a809;\npush $inputp1tbb9cabed7cc011b5;\npush $startIndexp0t42e99e0429583dd0;\npush 0;\npush 5;\n@callStack.push $inputp0td3e5ac4f4598a809;\n@callStack.push $inputp1tbb9cabed7cc011b5;\n@callStack.push $startIndexp0t42e99e0429583dd0;\nDeclared: startIndex, three" shape=box];
+t973cd5825fdbe57b [label="@callStack.pop $startIndexp0t42e99e0429583dd0;\n@callStack.pop $inputp1tbb9cabed7cc011b5;\n@callStack.pop $inputp0td3e5ac4f4598a809;\npop $threep0t27d497e40b1dccba;\npush $threep0t27d497e40b1dccba;\nneg 1;\neq { nop; };" shape=box];
+t52620249e4581017 [label="push 0;\nDropped: input, startIndex, three" shape=box];
+t183ac553f9d51aa6 [label="push $threep0t27d497e40b1dccba;\nadd 5;\npop $startIndexp0t42e99e0429583dd0;\npush $inputp0td3e5ac4f4598a809;\npush $inputp1tbb9cabed7cc011b5;\npush $startIndexp0t42e99e0429583dd0;\npush 5;\npush 3;\n@callStack.push $inputp0td3e5ac4f4598a809;\n@callStack.push $inputp1tbb9cabed7cc011b5;\n@callStack.push $startIndexp0t42e99e0429583dd0;\n@callStack.push $threep0t27d497e40b1dccba;\nDeclared: two" shape=box];
+ta32bbcaa7ca1dc2f [label="@callStack.pop $threep0t27d497e40b1dccba;\n@callStack.pop $startIndexp0t42e99e0429583dd0;\n@callStack.pop $inputp1tbb9cabed7cc011b5;\n@callStack.pop $inputp0td3e5ac4f4598a809;\npop $twop0t3610a4a8fee029f7;\npush $twop0t3610a4a8fee029f7;\nneg 1;\neq { nop; };" shape=box];
+tdf512992bbe21af [label="push 0;\nDropped: input, startIndex, three, two" shape=box];
+tc5dd59ee70a51d35 [label="push $twop0t3610a4a8fee029f7;\nadd 3;\npop $startIndexp0t42e99e0429583dd0;\npush $inputp0td3e5ac4f4598a809;\npush $inputp1tbb9cabed7cc011b5;\npush $startIndexp0t42e99e0429583dd0;\npush 8;\npush 3;\n@callStack.push $inputp0td3e5ac4f4598a809;\n@callStack.push $inputp1tbb9cabed7cc011b5;\n@callStack.push $startIndexp0t42e99e0429583dd0;\n@callStack.push $threep0t27d497e40b1dccba;\n@callStack.push $twop0t3610a4a8fee029f7;\nDeclared: one" shape=box];
+tf00637bfbb10a5d7 [label="@callStack.pop $twop0t3610a4a8fee029f7;\n@callStack.pop $threep0t27d497e40b1dccba;\n@callStack.pop $startIndexp0t42e99e0429583dd0;\n@callStack.pop $inputp1tbb9cabed7cc011b5;\n@callStack.pop $inputp0td3e5ac4f4598a809;\npop $onep0t8a40bb14048b40f1;\npush $onep0t8a40bb14048b40f1;\nneg 1;\neq { nop; };" shape=box];
+taa8eb8ea1971976f [label="push 0;\nDropped: input, startIndex, three, two, one" shape=box];
+t512950fb5fe1e255 [label="push $onep0t8a40bb14048b40f1;\nadd 3;\npop $startIndexp0t42e99e0429583dd0;\npush $inputp0td3e5ac4f4598a809;\npush $inputp1tbb9cabed7cc011b5;\npush $startIndexp0t42e99e0429583dd0;\npush 11;\npush 2;\n@callStack.push $inputp0td3e5ac4f4598a809;\n@callStack.push $inputp1tbb9cabed7cc011b5;\n@callStack.push $startIndexp0t42e99e0429583dd0;\n@callStack.push $threep0t27d497e40b1dccba;\n@callStack.push $twop0t3610a4a8fee029f7;\n@callStack.push $onep0t8a40bb14048b40f1;\nDeclared: go" shape=box];
+t9196a21523511eef [label="@callStack.pop $onep0t8a40bb14048b40f1;\n@callStack.pop $twop0t3610a4a8fee029f7;\n@callStack.pop $threep0t27d497e40b1dccba;\n@callStack.pop $startIndexp0t42e99e0429583dd0;\n@callStack.pop $inputp1tbb9cabed7cc011b5;\n@callStack.pop $inputp0td3e5ac4f4598a809;\npop $gop0tef59d5b1ba7b4802;\npush $gop0tef59d5b1ba7b4802;\nneg 1;\neq { nop; };" shape=box];
+t1e9c1e1ffc544abc [label="push 0;\nDropped: input, startIndex, three, two, one, go" shape=box];
+tc701eea7e2b134d7 [label="push $gop0tef59d5b1ba7b4802;\nadd 1;\npop $ip0tb5ffd77c21f2f4fa;\nprint $ip0tb5ffd77c21f2f4fa;\nflush;\npush 0;\nDeclared: i\nDropped: i, input, startIndex, three, two, one, go" shape=box];
+1211053195 -> ta8af52df1ba9b3e2;
+ta8af52df1ba9b3e2 -> t41419ad9d47b665f [label="call readInputLower(): String"];
+t41419ad9d47b665f -> t973cd5825fdbe57b [label="call indexOf(String, Number, String): Number"];
+t973cd5825fdbe57b -> t52620249e4581017 [label=true color=green];
+t973cd5825fdbe57b -> t183ac553f9d51aa6 [label=false color=red];
+t52620249e4581017 -> t88377ccd2fe7003a;
+t183ac553f9d51aa6 -> ta32bbcaa7ca1dc2f [label="call indexOf(String, Number, String): Number"];
+ta32bbcaa7ca1dc2f -> tdf512992bbe21af [label=true color=green];
+ta32bbcaa7ca1dc2f -> tc5dd59ee70a51d35 [label=false color=red];
+tdf512992bbe21af -> t88377ccd2fe7003a;
+tc5dd59ee70a51d35 -> tf00637bfbb10a5d7 [label="call indexOf(String, Number, String): Number"];
+tf00637bfbb10a5d7 -> taa8eb8ea1971976f [label=true color=green];
+tf00637bfbb10a5d7 -> t512950fb5fe1e255 [label=false color=red];
+taa8eb8ea1971976f -> t88377ccd2fe7003a;
+t512950fb5fe1e255 -> t9196a21523511eef [label="call indexOf(String, Number, String): Number"];
+t9196a21523511eef -> t1e9c1e1ffc544abc [label=true color=green];
+t9196a21523511eef -> tc701eea7e2b134d7 [label=false color=red];
+t1e9c1e1ffc544abc -> t88377ccd2fe7003a;
+tc701eea7e2b134d7 -> t88377ccd2fe7003a;
+}
+ }

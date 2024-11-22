@@ -1,0 +1,62 @@
+fun readInputLower(): String {
+    let arr = newArray[Number](0);
+    while (true) {
+        let input = read();
+        if (!transmute[Number, Boolean](input)) {
+            break;
+        }
+        if (input > 64 && input < 91) {
+            input += 32;
+        }
+        asm[Nothing]("""
+            @heap.push [input];
+            inc $heapSize;
+        """);
+        arr.len += 1;
+    }
+    return transmute[Array[Number], String](arr);
+}
+
+fun indexOf(s: String, start: Number, other: String): Number {
+    let i = start;
+    while (i < s.len) {
+        let j = 0;
+        while (j < other.len) {
+            if (get(s, i + j) != get(other, j)) {
+                break;
+            }
+            j += 1;
+        }
+        if (j == other.len) {
+            return i;
+        }
+        i += 1;
+    }
+    return -1;
+}
+
+@entry
+fun main() {
+    let input = readInputLower();
+    let startIndex = 0;
+    let three = indexOf(input, startIndex, "three");
+    if (three == -1) {
+        return;
+    }
+    startIndex = three + 5;
+    let two = indexOf(input, startIndex, "two");
+    if (two == -1) {
+        return;
+    }
+    startIndex = two + 3;
+    let one = indexOf(input, startIndex, "one");
+    if (one == -1) {
+        return;
+    }
+    startIndex = one + 3;
+    let go = indexOf(input, startIndex, "go");
+    if (go == -1) {
+        return;
+    }
+    print(go + 1);
+}
