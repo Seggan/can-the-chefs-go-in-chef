@@ -5,8 +5,8 @@ fun readInputLower(): String {
         if (!transmute[Number, Boolean](input)) {
             break;
         }
-        if (input > 64 && input < 91) {
-            input += 32;
+        if (input > 96) {
+            input -= 32;
         }
         asm[Nothing]("""
             @heap.push [input];
@@ -39,22 +39,22 @@ fun indexOf(s: String, start: Number, other: String): Number {
 fun main() {
     let input = readInputLower();
     let startIndex = 0;
-    let three = indexOf(input, startIndex, "three");
+    let three = indexOf(input, startIndex, "THREE");
     if (three == -1) {
         return;
     }
     startIndex = three + 5;
-    let two = indexOf(input, startIndex, "two");
+    let two = indexOf(input, startIndex, "TWO");
     if (two == -1) {
         return;
     }
     startIndex = two + 3;
-    let one = indexOf(input, startIndex, "one");
+    let one = indexOf(input, startIndex, "ONE");
     if (one == -1) {
         return;
     }
     startIndex = one + 3;
-    let go = indexOf(input, startIndex, "go");
+    let go = indexOf(input, startIndex, "GO");
     if (go == -1) {
         return;
     }
