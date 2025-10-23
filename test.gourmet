@@ -1,3 +1,4 @@
+@inline
 fun readInputLower(): String {
     let arr = newArray[Number](0);
     while (true) {
